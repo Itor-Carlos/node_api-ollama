@@ -16,10 +16,7 @@ app.post('/ollama', async (request, response) => {
             stream: false
         });
 
-        let responseText = responseOllama.data.response;
-        console.log(responseText)
-        let formattedText = responseText.replace(/(?:\r\n|\r|\n)/g, '\\n');
-        response.send(formattedText);
+        response.send(responseOllama.data.response.toString());
     } catch (error) {
         console.error("Erro ao chamar API Ollama:", error);
         response.status(500).send("Erro ao processar a solicitação.");
